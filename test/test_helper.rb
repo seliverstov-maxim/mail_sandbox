@@ -5,6 +5,7 @@ require 'minitest/autorun'
 require 'em-http-request'
 require "socket"
 require 'support/my_observer'
+require 'support/message'
 require 'net/smtp'
 
 require "minitest/unit"
