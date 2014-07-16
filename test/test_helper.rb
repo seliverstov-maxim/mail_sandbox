@@ -9,6 +9,8 @@ require 'net/smtp'
 
 require "minitest/unit"
 require "mocha/mini_test"
+require 'webmock/minitest'
+require 'wrong/adapters/minitest'
 
 module SpawnHelper
   PID_FILE = "/tmp/mail_sandbox.#{rand*1000.to_i}.pid"
