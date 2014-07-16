@@ -15,8 +15,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = MailSandbox::VERSION
 
-  gem.add_dependency('eventmachine', '~> 1.0.1')
-  gem.add_dependency('em-http-request', '~> 0.3.0')
+  gem.add_dependency('eventmachine', '~> 1.0.3')
+  gem.add_dependency('em-http-request', '~> 1.1.2')
   gem.add_dependency('OptionParser')
   gem.add_dependency('file-utils')
   gem.add_dependency('simple_pid')
@@ -24,5 +24,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('rake')
   gem.add_development_dependency('minitest', '4.7.5')
   gem.add_development_dependency('turn')
-  gem.add_development_dependency('mocha', '>= 0.13.1')
+  gem.add_development_dependency('mocha', '>= 1.1.0')
+  gem.add_development_dependency('webmock', '~> 1.18.0')
+  gem.add_development_dependency('wrong')
 end
