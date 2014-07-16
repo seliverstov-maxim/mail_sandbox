@@ -16,6 +16,28 @@ class EmServerTest < MiniTest::Unit::TestCase
       EM::Protocols::SmtpClient.send(@message_params)
     }
 
-    assert_equal( c.message.recipients, ["<you@example.com>", "<we@example.com>"] )
+    assert { @connection.message.recipients == ["<you@example.com>", "<we@example.com>"] }
+  end
+
+  def test_perfomance
+    url = "http://localhost/api"
+    stub_request(:any, url).to_return(status: 200)
+
+    observer = MailSandbox::Observer::Http.new(url)
+    MailSandbox.subscribe observer
+    MailSandbox.logger.level = Logger::ERROR
+
+    EM.run do
+      EM.start_server(@em_host, @em_port, MailSandbox::Server) { |conn| @connection = conn }
+      EM::Timer.new(7) { EM.stop }
+      (1..400).each do
+        email = EM::Protocols::SmtpClient.send(@message_params)
+      end
+    end
+
+    assert_requested :post, url, times: 400
+
+    MailSandbox.unsubscribe observer
+    WebMock.reset!
   end
 end
