@@ -29,7 +29,7 @@ class SubscribeTest < MiniTest::Unit::TestCase
     http_mock.stubs(:callback)
     http_mock.stubs(:errback)
 
-    EventMachine::HttpRequest.any_instance.expects(:post).with(body).returns(http_mock)
+    EventMachine::HttpConnection.any_instance.expects(:post).with(body).returns(http_mock)
 
     @observer = MailSandbox::Observer::Http.new url
     @subscriber.subscribe @observer
